@@ -30,7 +30,6 @@ public class TradeInfo {
     // Confirm Timer
     private final HashMap<Player, BukkitTask> confirmTaskMap = new HashMap<>();
 
-    private boolean isStarted = false;
     @Getter
     private boolean finished = false;
 
@@ -56,8 +55,6 @@ public class TradeInfo {
         // Mapに追加
         invMap.put(players.get(0), forPlayer0);
         invMap.put(players.get(1), forPlayer1);
-
-        isStarted = true;
     }
 
     public void tradeItems() {
@@ -97,7 +94,7 @@ public class TradeInfo {
 
         for (Player player : players) {
             List<ItemStack> items = itemsMap.getOrDefault(player, new ArrayList<>());
-            player.getInventory().addItem(items.toArray(new ItemStack[items.size()]));
+            player.getInventory().addItem(items.toArray(new ItemStack[0]));
             player.closeInventory();
             player.sendMessage(Chat.f("{0}&a取引が完了しました！", SimpleTrade.getPrefix()));
             for (int i = 0; i < 3; i++)

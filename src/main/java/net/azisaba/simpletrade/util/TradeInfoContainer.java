@@ -21,13 +21,12 @@ public class TradeInfoContainer {
     // 現在取引中の情報を格納するHashMap
     private final HashMap<Player, TradeInfo> tradingMap = new HashMap<>();
 
-    public TradeInfo create(Player player1, Player player2) {
+    public void create(Player player1, Player player2) {
         TradeInfo info = new TradeInfo(player1, player2);
         info.startTrade();
 
         tradingMap.put(player1, info);
         tradingMap.put(player2, info);
-        return info;
     }
 
     /**
