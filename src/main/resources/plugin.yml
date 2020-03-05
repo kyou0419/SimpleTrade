@@ -8,6 +8,11 @@ commands:
   trade:
     usage: /trade <player>
     permission: simpletrade.command.trade
+  tradeadmin:
+    usage: /<label> [info]
+    permission: simpletrade.command.tradeadmin
 permissions:
   simpletrade.command.trade:
     default: true
+  simpletrade.command.tradeadmin:
+    default: op

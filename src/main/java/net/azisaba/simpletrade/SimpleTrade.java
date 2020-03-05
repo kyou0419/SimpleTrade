@@ -1,6 +1,7 @@
 package net.azisaba.simpletrade;
 
 import lombok.Getter;
+import net.azisaba.simpletrade.command.TradeAdminCommand;
 import net.azisaba.simpletrade.command.TradeCommand;
 import net.azisaba.simpletrade.listener.InventoryClickListener;
 import net.azisaba.simpletrade.listener.InventoryCloseListener;
@@ -33,6 +34,7 @@ public class SimpleTrade extends JavaPlugin {
 
         // コマンドの登録
         Bukkit.getPluginCommand("trade").setExecutor(new TradeCommand(this));
+        Bukkit.getPluginCommand("tradeadmin").setExecutor(new TradeAdminCommand(this));
 
         // Listenerの登録
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(this), this);

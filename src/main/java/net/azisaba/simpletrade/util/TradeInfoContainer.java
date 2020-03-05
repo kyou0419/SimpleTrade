@@ -58,4 +58,13 @@ public class TradeInfoContainer {
             }
         }
     }
+
+    public int getTrades() {
+        for (Player player : new ArrayList<>(tradingMap.keySet())) {
+            if (tradingMap.get(player).isFinished()) {
+                tradingMap.remove(player);
+            }
+        }
+        return tradingMap.size();
+    }
 }
