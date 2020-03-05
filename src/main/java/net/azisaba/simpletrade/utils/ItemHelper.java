@@ -29,7 +29,7 @@ public class ItemHelper {
     }
 
     public static ItemStack createItem(Material material, int data, String displayName, String... lore) {
-        ItemStack item = new ItemStack(material, data);
+        ItemStack item = new ItemStack(material, 1, (short) data);
         ItemMeta meta = item.getItemMeta();
 
         meta.setDisplayName(displayName != null ? displayName : "");
