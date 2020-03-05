@@ -69,24 +69,9 @@ public class TradeInfo {
             if (i == 0)
                 inv = invMap.get(players.get(1));
 
-            for (int i2 = 0; i2 < 40; i2++) {
-                // しきりに到達した場合は折り返す
-                if (i2 != 0 && (i2 + 5) % 9 == 0) {
-                    i2 += 4;
-                    continue;
-                }
-
-                // アイテム取得
-                ItemStack slotItem = inv.getItem(i2);
-                // アイテムがnullの場合 continue
-                if (slotItem == null || slotItem.getType() == Material.AIR) {
-                    continue;
-                }
-
-                // アイテム追加
-                List<ItemStack> tempItemsList = itemsMap.getOrDefault(p, new ArrayList<>());
-                tempItemsList.add(slotItem);
-                itemsMap.put(p, tempItemsList);
+            List<ItemStack> items = getTradingItems(inv);
+            if (!items.isEmpty()) {
+                itemsMap.put(p, items);
             }
 
             // 空きスロットが足りない場合
@@ -276,19 +261,9 @@ public class TradeInfo {
             Inventory inv = invMap.get(p);
 
             // アイテムを返す
-            for (int i = 0; i < 40; i++) {
-                // しきりに到達した場合は折り返す
-                if (i != 0 && (i + 5) % 9 == 0) {
-                    i += 4;
-                    continue;
-                }
-
-                // アイテム取得
-                ItemStack item = inv.getItem(i);
-                // 存在する場合は返す
-                if (item != null && item.getType() != Material.AIR) {
-                    p.getInventory().addItem(item);
-                }
+            List<ItemStack> items = getTradingItems(inv);
+            for (ItemStack item : items) {
+                p.getInventory().addItem(item);
             }
         });
     }
@@ -314,6 +289,29 @@ public class TradeInfo {
 
         // タスクを消す
         confirmTaskMap.values().forEach(BukkitTask::cancel);
+    }
+
+    private List<ItemStack> getTradingItems(Inventory inv) {
+        List<ItemStack> items = new ArrayList<>();
+        for (int i = 0; i < 40; i++) {
+            // しきりに到達した場合は折り返す
+            if (i != 0 && (i + 5) % 9 == 0) {
+                i += 4;
+                continue;
+            }
+
+            // アイテム取得
+            ItemStack slotItem = inv.getItem(i);
+            // アイテムがnullの場合 continue
+            if (slotItem == null || slotItem.getType() == Material.AIR) {
+                continue;
+            }
+
+            // アイテム追加
+            items.add(slotItem);
+        }
+
+        return items;
     }
 
     /**
