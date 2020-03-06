@@ -10,8 +10,10 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 @RequiredArgsConstructor
 public class InventoryClickListener implements Listener {
@@ -48,7 +50,11 @@ public class InventoryClickListener implements Listener {
         // クリックしたインベントリがプレイヤーのインベントリの場合
         if (e.getClickedInventory() == p.getInventory()) {
             // アイテムを追加する
-            boolean success = info.addItem(p, e.getCurrentItem());
+            ItemStack addItem = e.getCurrentItem().clone();
+            if (e.getAction() == InventoryAction.PICKUP_HALF) {
+                addItem.setAmount(1);
+            }
+            boolean success = info.addItem(p, addItem);
             // 失敗していたらreturn
             if (!success) {
                 p.sendMessage(Chat.f("&cアイテムがいっぱいです！"));
@@ -56,7 +62,11 @@ public class InventoryClickListener implements Listener {
                 return;
             }
             // クリックしたアイテムを削除
-            p.getInventory().setItem(e.getSlot(), null);
+            if (e.getAction() == InventoryAction.PICKUP_HALF) {
+                e.getCurrentItem().setAmount(e.getCurrentItem().getAmount() - 1);
+            } else {
+                p.getInventory().setItem(e.getSlot(), null);
+            }
 
             // 音を鳴らす
             info.playSound();

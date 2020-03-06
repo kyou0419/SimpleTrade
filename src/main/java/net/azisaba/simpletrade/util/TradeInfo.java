@@ -123,6 +123,11 @@ public class TradeInfo {
                 // 終了
                 set = true;
                 break;
+            } else if (slotItem.isSimilar(item) && slotItem.getAmount() + item.getAmount() <= slotItem.getMaxStackSize()) { // スタックできるアイテムで、個数的にもスタック可能な場合
+                slotItem.setAmount(slotItem.getAmount() + item.getAmount());
+                setSlot = i;
+                set = true;
+                break;
             }
         }
 
@@ -137,7 +142,7 @@ public class TradeInfo {
             inv2 = inventories.get(1);
         }
         // setSlotに5を足せば良い
-        inv2.setItem(setSlot + 5, item);
+        inv2.setItem(setSlot + 5, inv.getItem(setSlot));
 
         for (Player player : players) {
             confirm(player, false);
