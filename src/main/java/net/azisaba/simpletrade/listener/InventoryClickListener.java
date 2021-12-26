@@ -20,7 +20,7 @@ public class InventoryClickListener implements Listener {
 
     private final SimpleTrade plugin;
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onClickInventory(InventoryClickEvent e) {
         // プレイヤーではない場合return
         if (!(e.getWhoClicked() instanceof Player)) {

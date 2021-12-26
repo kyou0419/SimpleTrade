@@ -59,6 +59,10 @@
 
     <repositories>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
@@ -91,10 +95,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.azisaba</groupId>
+            <groupId>com.github.AzisabaNetwork</groupId>
             <artifactId>PlayerSettings</artifactId>
-            <version>1.0.0</version>
-            <scope>provided</scope>
+            <version>master-efa22439b9-1</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
