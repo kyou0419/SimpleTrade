@@ -97,7 +97,7 @@
         <dependency>
             <groupId>com.github.AzisabaNetwork</groupId>
             <artifactId>PlayerSettings</artifactId>
-            <version>master-efa22439b9-1</version>
+            <version>master-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
