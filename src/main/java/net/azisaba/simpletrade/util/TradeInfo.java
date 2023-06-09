@@ -42,7 +42,7 @@ public class TradeInfo {
      */
     public void startTrade() {
         // インベントリ作成
-        Inventory forPlayer0 = Bukkit.createInventory(null, 9 * 6, Chat.f("You{0}{1}", Strings.repeat(" ", 15), players.get(1).getName()));
+        Inventory forPlayer0 = Bukkit.createInventory(null, 9 * 6, Chat.f("You{0}{1}", Strings.repeat(" ", 15), players.get(1).getName()));//String.Repeatで空白を15個作った後に取引相手のプレイヤーネームを出してる　例 miyabi0333               miyabi0332
         Inventory forPlayer1 = Bukkit.createInventory(null, 9 * 6, Chat.f("You{0}{1}", Strings.repeat(" ", 15), players.get(0).getName()));
 
         // アイテムを追加
@@ -84,7 +84,7 @@ public class TradeInfo {
                         // メッセージを表示する
                         p2.sendMessage(Chat.f("{0}&c相手のインベントリに空きがありません!", SimpleTrade.getPrefix()));
                     }
-                    p2.playSound(p2.getLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1, 0.5f);
+                    p2.playSound(p2.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0.5f);
                 });
                 return;
             }
@@ -98,7 +98,7 @@ public class TradeInfo {
             player.closeInventory();
             player.sendMessage(Chat.f("{0}&a取引が完了しました！", SimpleTrade.getPrefix()));
             for (int i = 0; i < 3; i++)
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BELL, 2, 1.5f);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 2, 1.5f);
         }
     }
 
@@ -319,22 +319,22 @@ public class TradeInfo {
     /**
      * 空のインベントリに必要なアイテムを追加します
      */
-    private void initInventories(Inventory... inventories) {
+    private void initInventories(Inventory... inventories) {//...は可変長引数と呼ばれるものでなんでも送れるようにしている？
         if (inventories.length <= 0) {
             return;
-        }
+        }//バグインベントリ対策　無視していい
 
-        for (Inventory inv : inventories) {
+        for (Inventory inv : inventories) {//inventoriesの要素分繰り返す
             for (int i = 0; i < inv.getSize(); i++) {
                 if ((i + 5) % 9 == 0) {
                     inv.setItem(i, ItemDB.getSeparateItem());
                     i += 8;
-                }
+                }//縦一列にセパレートアイテム(真ん中のステンドグラス)を設置する、1$10$にするにはforをそもそも削除してinv.setItem(置きたいところ, ItemDB.置くもの)
             }
 
             inv.setItem(48, ItemDB.getConfirmItem());
             inv.setItem(50, ItemDB.getOpponentNotConfirmed());
-        }
+        }//これforいる？？？
     }
 
     private int getEmptySlots(Player p) {
@@ -346,6 +346,6 @@ public class TradeInfo {
             }
         }
 
-        return count;
+        return count;//きっとこれは残り枠があるかないかの判定だ相手側の所を読み込んだりしないんだろうか？
     }
 }

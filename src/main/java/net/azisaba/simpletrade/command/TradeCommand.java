@@ -26,7 +26,7 @@ public class TradeCommand implements CommandExecutor {
             return true;
         }
 
-        Player p = (Player) sender;
+        Player p = (Player) sender;//pにコマンドを打ったプレイヤーをぶち込んでる
 
         // コマンドのクールダウンに引っかかっている場合は無視
         if (System.currentTimeMillis() - lastExecuted.getOrDefault(p.getUniqueId(), 0L) < 3000L) {
@@ -36,7 +36,7 @@ public class TradeCommand implements CommandExecutor {
         // 引数が足りない場合
         if (args.length <= 0) {
             // 使い方を表示してreturn
-            p.sendMessage(Chat.f("{0}&c使い方: &e/{1} <Player>", SimpleTrade.getPrefix(), label));
+            p.sendMessage(Chat.f("{0}&c使い方: &e/{1} <Player>", SimpleTrade.getPrefix(), label));//{0}ってなんやねん
             return true;
         }
 
@@ -55,10 +55,10 @@ public class TradeCommand implements CommandExecutor {
             return true;
         }
 
-        lastExecuted.put(p.getUniqueId(), System.currentTimeMillis());
+        lastExecuted.put(p.getUniqueId(), System.currentTimeMillis());//クールタイムのための記録っぽい
 
         // リクエストを送信する
-        plugin.getRequestCollector().sendRequest(p, target);
+        plugin.getRequestCollector().sendRequest(p, target);//苦難を乗り越えて無事リクエストを発出
         return true;
     }
 }

@@ -78,7 +78,7 @@ public class TradeRequestCollector {
                 .runTaskLater(SimpleTrade.getPlugin(), 400L);
         HashMap<UUID, BukkitTask> taskMap = expireTaskMap.getOrDefault(from.getUniqueId(), new HashMap<>());
         if (taskMap.containsKey(to.getUniqueId())) {
-            taskMap.get(to.getUniqueId()).cancel();
+            taskMap.get(to.getUniqueId()).cancel();//これでインベントリの機能実装してるのではないか
         }
         taskMap.put(to.getUniqueId(), task);
         expireTaskMap.put(from.getUniqueId(), taskMap);

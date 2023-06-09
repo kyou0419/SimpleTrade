@@ -14,8 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SimpleTrade extends JavaPlugin {
 
-    @Getter
-    private static final String prefix = Chat.f("&6[&dTrade&6] &r");
+    @Getter//getter setterを自動で作成する何か　これを付けるとclass名.変数名で値を取得できる。 lombok君がやってるっぽい？
+    private static final String prefix = Chat.f("&6[&dTrade&6] &r");//chat.fはカラーコードをChatColorを使わないで表現する方法
     @Getter
     private static SimpleTrade plugin;
     @Getter
@@ -40,14 +40,14 @@ public class SimpleTrade extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(this), this);
         Bukkit.getPluginManager().registerEvents(new InventoryCloseListener(this), this);
 
-        Bukkit.getLogger().info(getName() + " enabled.");
+        Bukkit.getLogger().info(getName() + " enabled.");//SimpleTrade enabledってコンソールで表示されるだけ
     }
 
     @Override
     public void onDisable() {
         // 取引中なら中断する
-        tradeInfoContainer.onDisable();
+        tradeInfoContainer.onDisable();//どういうことなの。。
 
-        Bukkit.getLogger().info(getName() + " disabled");
+        Bukkit.getLogger().info(getName() + " disabled");//SimpleTrade disabled!
     }
 }

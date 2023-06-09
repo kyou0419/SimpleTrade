@@ -14,19 +14,19 @@ import java.util.List;
  * @author siloneco
  */
 @RequiredArgsConstructor
-public class TradeInfoContainer {
+public class TradeInfoContainer {//一番最初に読み込まれるclass いったい何が詰まっているだろう。
 
     private final SimpleTrade plugin;
 
     // 現在取引中の情報を格納するHashMap
-    private final HashMap<Player, TradeInfo> tradingMap = new HashMap<>();
+    private final HashMap<Player, TradeInfo> tradingMap = new HashMap<>();//取引中に取引しないために使うのかな
 
     public void create(Player player1, Player player2) {
-        TradeInfo info = new TradeInfo(player1, player2);
+        TradeInfo info = new TradeInfo(player1, player2);//よくわからないけどTradeInfoのコンストラクタを呼び出してプレイヤー二人をListに偽装した配列に入れている。どういうこと？
         info.startTrade();
 
-        tradingMap.put(player1, info);
-        tradingMap.put(player2, info);
+        tradingMap.put(player1, info);//ここで上のリスト偽装配列をHashMapに投入している　きっとこれがTrade開始の初期化処理なんだろう
+        tradingMap.put(player2, info);//Vault対応させたいだけならここまでで変更するのはStendGlassの初期値だけ。
     }
 
     /**
